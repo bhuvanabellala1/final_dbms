@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Our Book App - Add Book</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+
+	<body>
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>Add book page</h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-1">
+
+				</div>
+				<form action="/addbook" class="col-md-10" method="POST">
+					<div class="form-group">
+						<label for="title">Title:</label>
+						<input type="text" class="form-control" id="title" name="title">
+					</div>
+					<div class="form-group">
+						<label for="author">Author:</label>
+						<input type="text" class="form-control" id="author" name="author">
+					</div>
+
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+				<div class="col-md-1">
+				
+				</div>
+			</div>
+	</body>
+</html>
