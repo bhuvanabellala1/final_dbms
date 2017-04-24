@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, escape
+from flask import Flask, render_template, request, redirect, session, escape, url_for
 app = Flask(__name__)
 
 import sqlite3 as lite
@@ -12,20 +12,24 @@ def index():
 	if 'username' in session:
 		return render_template('home.html')
 	else:
-		return render_template('login.html')
+		print("logging")
+		return redirect(url_for('login'))
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
 	if request.method=='POST':
-		print request.form.get("username")
-		print request.form.get("password")
-		return render_template('home.html')
+		session['username'] = request.form.get("username")
+		print(request.form.get("username"))
+		print(request.form.get("password"))
+		return redirect(url_for('index'))
+	else:
+		return render_template('login.html')
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
 	if request.method=='POST':
-		print  request.form.get("username")
-		
+		print("username")
+		return redirect(url_for('index'))
 	return render_template('register.html')
 
 
