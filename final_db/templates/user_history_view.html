@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Our Book App</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-10">
+					<h1>Your User History</h1>
+				</div>
+				<div class="col-md-2">
+				<a href="{{url_for('logout')}}"><button class="btn btn-default">Logout</button></a>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<table class="table">
+						<tr>
+							<th>Username</th>
+							<th>Produce ID</th>
+							<th>Produce Name</th>
+							<th>Date of Harvest</th>
+							<th>Price</th>
+							<th>Quantity</th>
+						</tr>
+
+						{% for row in rows %}
+							<tr>
+								<td>{{ row[0] }}</td>
+								<td>{{ row[9] }}</td>
+								<td>{{ row[11] }}</td>
+								<td>{{ row[12] }}</td>
+								<td>{{ row[13] }}</td>
+								<td>{{ row[14] }}</td>
+								<td>
+									<a href="{{url_for('edit', oid=row[9])}}"><button class="btn btn-default">Edit</button></a>
+								</td>
+							</tr>
+						{% endfor %}
+					</table>
+				</div>
+			</div>
+
+
+		</div>
+	</body>
+</html>
