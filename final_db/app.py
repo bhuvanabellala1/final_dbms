@@ -165,18 +165,18 @@ def rate():
 				with con:
 					print("inserting new rating")
 					cur = con.cursor()
-					cur.execute('insert into Rating(customer_id,producer_id,rating) values ("{0}","{1}","{2}")'.format(session['username'],request.form.get("username"),int(request.form.get("rating"))))
+					cur.execute('insert into Rating(customer_id,producer_id,rating) values ("{0}","{1}","{2}")'.format(session['username'],request.form.get("username"),float(request.form.get("rating"))))
 					print("Updating Producer rating")
-					cur.execute("update Producer set sum_ratings=?,total_ratings=? where Producer.producer_id=?;",(counts[0][7] + int(request.form.get("rating")), counts[0][8]+1, request.form.get("username")))
+					cur.execute("update Producer set sum_ratings=?,total_ratings=? where Producer.producer_id=?;",(counts[0][7] + float(request.form.get("rating")), counts[0][8]+1, request.form.get("username")))
 			else:
 				with con:
 					print("updating rating")
 					prev_rating = int(rows[0][3])
 					cur = con.cursor()
 					print("updating ratings table")
-					cur.execute("update Rating set rating=? where Rating.producer_id=? and Rating.customer_id=?;",(int(request.form.get("rating")),request.form.get("username"),session['username']))
+					cur.execute("update Rating set rating=? where Rating.producer_id=? and Rating.customer_id=?;",(float(request.form.get("rating")),request.form.get("username"),session['username']))
 					print("updating producers table")
-					cur.execute("update Producer set sum_ratings=? where Producer.producer_id=?;",(counts[0][7] + int(request.form.get("rating")) - prev_rating, request.form.get("username")))
+					cur.execute("update Producer set sum_ratings=? where Producer.producer_id=?;",(counts[0][7] + float(request.form.get("rating")) - prev_rating, request.form.get("username")))
 			print("Rating")
 			cur.execute("select Rating.producer_id, Rating.rating, Producer.sum_ratings/Producer.total_ratings from Rating inner join Producer on Rating.producer_id=Producer.producer_id where Rating.customer_id='" + session['username'] + "';")
 			rows = cur.fetchall()
